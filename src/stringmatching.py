@@ -25,6 +25,8 @@ def search(pattern, text, algorithm, all=False):
         all (bool): if True, search for all occurrences of pattern in text else return first occurrence or None
         algorithm (Algorithms): Enum value that specifies the algorithm to use
     '''
+    if not pattern or not text:
+        raise ValueError('Pattern or text is empty!')
     if isinstance(algorithm, Algorithms):
         if algorithm == Algorithms.naive:
             naive = Naive()

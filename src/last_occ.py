@@ -1,4 +1,5 @@
 from base import Base
+from collections import defaultdict
 
 class LastOcc(Base):
     def search(self, pattern, text, all=False):
@@ -40,16 +41,13 @@ class LastOcc(Base):
 
     def __last_occurence(self, pat, text):
         '''
-        Returns the las occurrence table
+        Returns the last occurrence table
 
         Args:
             pat (str): pattern to search for
             text (str): source in what the pattern should be searched
         '''
-        last_occ = {}
-        A = set(text) | set(pat)
-        for a in A:
-            last_occ[a] = self.m # initialized with the length of the pattern
+        last_occ = defaultdict(lambda: self.m) # saves initialization overhead by returning a default value when a non exisiting key is used
         for k in range(0, self.m - 1):
             last_occ[pat[k]] = self.m - 1 - k
         return last_occ

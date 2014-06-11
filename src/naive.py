@@ -37,5 +37,5 @@ class Naive(Base):
             while j < m and pat[j] == text[i + j]:
                 j += 1
             if j == m:
-                return i+j-1
+                return i
             i += 1

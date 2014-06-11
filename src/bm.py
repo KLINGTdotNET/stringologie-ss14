@@ -1,3 +1,4 @@
+from collections import defaultdict
 from base import Base
 
 class BoyerMoore(Base):
@@ -5,7 +6,6 @@ class BoyerMoore(Base):
         start = 0
         self.m = len(pattern)
         self.n = len(text)
-        self.a = set(pattern) | set(text) # | union
         self.suffix = self.__get_suffix(pattern)
         self.weak_bm_shift = self.__get_weak_bm_shift(pattern)
         self.bm_shift = self.__get_bm_shift(pattern)
@@ -29,18 +29,19 @@ class BoyerMoore(Base):
         suff = [ 0 for _ in range(0, self.m) ] # initialize
         suff[self.m - 1] = self.m
         for i in reversed(range(0, self.m - 1)):  # m-1 because the upper bound is exclusive
-                if i > g and suff[i + self.m - 1 - f] < i - g:
-                    suff[i] = suff[i + self.m - 1 - f]
-                else:
-                    if i < g:
-                        g = i
-                    f = i
-                    while g >= 0 and pat[g] == pat[g + self.m - 1 - f]:
-                        g -= 1
-                    suff[i] = f-g
+            if i > g and suff[i + self.m - 1 - f] < i - g:
+                suff[i] = suff[i + self.m - 1 - f]
+            else:
+                if i < g:
+                    g = i
+                f = i
+                while g >= 0 and pat[g] == pat[g + self.m - 1 - f]:
+                    g -= 1
+                suff[i] = f-g
         return suff
 
-    def __get_weak_bm_shift(self, pat): # good suffix table
+    def __get_weak_bm_shift(self, pat):
+        # returns good suffix table
         bm_shift = [self.m] * self.m
         for k in reversed(range(0, self.m)):
             if self.suffix[k] == k + 1:
@@ -53,9 +54,7 @@ class BoyerMoore(Base):
 
     def __get_bm_shift(self, pat):
         # returns bad_character shift table
-        bm_shift = {}
-        for i in self.a:
-            bm_shift[i] = self.m
+        bm_shift = defaultdict(lambda: self.m)
         for i in range(0, self.m - 1):
             bm_shift[pat[i]] = self.m - 1 - i
         return bm_shift
@@ -63,6 +62,8 @@ class BoyerMoore(Base):
     def __boyer_moore(self, pat, text, start):
         '''
         Boyer-Moore string search
+
+        Todo: default dict
 
         Args:
             pat (str): pattern to search for
@@ -77,4 +78,4 @@ class BoyerMoore(Base):
             if j < 0:
                 return i
             else:
-                i += self.bm_shift[text[i + j]] - self.m + 1
+                i += max(self.weak_bm_shift[j], self.bm_shift[text[i + j]] - self.m + 1)
