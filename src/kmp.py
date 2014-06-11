@@ -41,6 +41,12 @@ class KnuthMorrisPratt(Base):
             j = max(0, self.strong_border[j])
 
     def __strong_border(self, pat):
+        '''
+        Returns the strong border table
+
+        Args:
+            pat (str): pattern to search for
+        '''
         strong_border = [ -1 ]
         t = -1
         for j in range(1, self.m + 1):

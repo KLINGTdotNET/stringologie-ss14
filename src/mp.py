@@ -44,6 +44,9 @@ class MorrisPratt(Base):
     def __border_table(self, pat):
         '''
         Version from page 76
+
+        Args:
+            pat (str): pattern to search for
         '''
         bord = [ -1 ]
         t = -1
@@ -57,6 +60,9 @@ class MorrisPratt(Base):
     def __border_table_mp(self, pat):
         '''
         Alternative border function based on MP itself, that uses pat and text synonymous
+
+        Args:
+            pat (str): pattern to search for
         '''
         i = 1
         j = 0

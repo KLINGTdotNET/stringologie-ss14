@@ -25,6 +25,12 @@ class BoyerMoore(Base):
             return [ self.__boyer_moore(pattern, text, start) ]
 
     def __get_suffix(self, pat):
+        '''
+        Returns the suffix table
+
+        Args:
+            pat (str): pattern to search for
+        '''
         g = self.m - 1
         suff = [ 0 for _ in range(0, self.m) ] # initialize
         suff[self.m - 1] = self.m
@@ -41,8 +47,13 @@ class BoyerMoore(Base):
         return suff
 
     def __get_weak_bm_shift(self, pat):
-        # returns good suffix table
-        bm_shift = [self.m] * self.m
+        '''
+        Returns the good suffix table
+
+        Args:
+            pat (str): pattern to search for
+        '''
+        bm_shift = [ self.m ] * self.m
         for k in reversed(range(0, self.m)):
             if self.suffix[k] == k + 1:
                 for i in range(0, self.m - k):
@@ -53,6 +64,12 @@ class BoyerMoore(Base):
         return bm_shift
 
     def __get_bm_shift(self, pat):
+        '''
+        Returns the bad character shift table
+
+        Args:
+            pat (str): pattern to search for
+        '''
         # returns bad_character shift table
         bm_shift = defaultdict(lambda: self.m)
         for i in range(0, self.m - 1):
@@ -62,8 +79,6 @@ class BoyerMoore(Base):
     def __boyer_moore(self, pat, text, start):
         '''
         Boyer-Moore string search
-
-        Todo: default dict
 
         Args:
             pat (str): pattern to search for
