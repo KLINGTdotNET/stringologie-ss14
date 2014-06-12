@@ -1,3 +1,5 @@
+*.idea
+*.sublime-
 __pycache__
 *.pyc
 resources/
