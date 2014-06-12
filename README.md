@@ -2,13 +2,15 @@
 
 ## Algorithms
 
+- naive sliding window
+- sliding window with last-occurrence table
+- Morris-Pratt
 - Knuth-Morris-Pratt
 - Boyer-Moore
-- ...
 
 ## Usage
 
-...
+Use the `search` method of the stringmatching module. To choose the algorithm, pass a vlaue of the `stringmatching.Algorithms` enum to the `search` function.
 
 ## Text Sources
 

@@ -13,7 +13,7 @@ class BoyerMoore(Base):
             results = []
             limit = len(text) - len(pattern)
             stop = False
-            while start < limit and not stop:
+            while start <= limit and not stop:
                 result = self.__boyer_moore(pattern, text, start)
                 if result is not None:
                     results.append(result)
