@@ -11,7 +11,7 @@ class Naive(Base):
                 result = self.__naive(pattern, text, start)
                 if result is not None:
                     results.append(result)
-                    start = result + 1
+                    start = result + len(pattern)
                 else:
                     stop = True
             return results

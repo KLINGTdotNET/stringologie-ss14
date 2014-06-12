@@ -14,7 +14,7 @@ class KnuthMorrisPratt(Base):
                 result = self.__knuth_morris_pratt(pattern, text, start)
                 if result is not None:
                     results.append(result)
-                    start = result + 1
+                    start = result + len(pattern)
                 else:
                     stop = True
             return results

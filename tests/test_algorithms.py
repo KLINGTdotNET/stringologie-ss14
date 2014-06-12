@@ -39,6 +39,11 @@ class TestAlgorithms(unittest.TestCase):
             'text': 'abc'*3,
             'result': [0]
         }
+        self.almost = {
+            'pattern': 'a',
+            'text': 'a'*1024,
+            'result': [ _ for _ in range(1024) ]
+        }
 
     def test_search(self):
         alg = sm.Algorithms.naive
@@ -50,107 +55,85 @@ class TestAlgorithms(unittest.TestCase):
         self.assertRaises(ValueError, sm.search, *(None, text, alg))
         self.assertRaises(ValueError, sm.search, *(pattern, None, alg))
 
+    def test_corner_cases(self):
+        for alg in sm.Algorithms:
+            self.assertEqual(self.one_char['result'],
+                sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
+            self.assertEqual(self.longer['result'],
+                sm.search(self.longer['pattern'], self.longer['text'], alg, True))
+            self.assertEqual(self.not_in_text['result'],
+                sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
+            self.assertEqual(self.same_length['result'],
+                sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+            self.assertEqual(self.same_length['result'],
+                sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+            self.assertEqual(self.same_length['result'],
+                sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+            self.assertEqual(self.same_length['result'],
+                sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+            self.assertEqual(self.same_length['result'],
+                sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+            self.assertEqual(self.is_the_same['result'],
+                sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+            self.assertEqual(self.almost['result'],
+                sm.search(self.almost['pattern'], self.almost['text'], alg, True))
+
     def test_naive(self):
         alg = sm.Algorithms.naive
-        self.assertEqual(self.one_char['result'],
-            sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
-        self.assertEquals(self.longer['result'],
-            sm.search(self.longer['pattern'], self.longer['text'], alg, True))
-        self.assertEquals(self.not_in_text['result'],
-            sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.is_the_same['result'],
-            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+        text = 'a'*1024+'b'
+        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+        text = ('a'*128+'b')*5
+        result = [ x*128+x-1 for x in range(1,6) ]
+        self.assertEqual(result, sm.search('b', text, alg, True))
+        pattern = 'ac'
+        text = ('abab'*1024+'ac')*5
+        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+        self.assertEqual(result, sm.search(pattern, text, alg, True))
 
     def test_last_occ(self):
         alg = sm.Algorithms.last_occ
-        self.assertEqual(self.one_char['result'],
-            sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
-        self.assertEquals(self.longer['result'],
-            sm.search(self.longer['pattern'], self.longer['text'], alg, True))
-        self.assertEquals(self.not_in_text['result'],
-            sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.is_the_same['result'],
-            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+        text = 'a'*1024+'b'
+        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+        text = ('a'*128+'b')*5
+        result = [ x*128+x-1 for x in range(1,6) ]
+        self.assertEqual(result, sm.search('b', text, alg, True))
+        pattern = 'ac'
+        text = ('abab'*1024+'ac')*5
+        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+        self.assertEqual(result, sm.search(pattern, text, alg, True))
 
     def test_morris_pratt(self):
         alg = sm.Algorithms.morris_pratt
-        self.assertEqual(self.one_char['result'],
-            sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
-        self.assertEquals(self.longer['result'],
-            sm.search(self.longer['pattern'], self.longer['text'], alg, True))
-        self.assertEquals(self.not_in_text['result'],
-            sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.is_the_same['result'],
-            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+        text = 'a'*1024+'b'
+        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+        text = ('a'*128+'b')*5
+        result = [ x*128+x-1 for x in range(1,6) ]
+        self.assertEqual(result, sm.search('b', text, alg, True))
+        pattern = 'ac'
+        text = ('abab'*1024+'ac')*5
+        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+        self.assertEqual(result, sm.search(pattern, text, alg, True))
 
     def knuth_morris_pratt(self):
         alg = sm.Algorithms.knuth_morris_pratt
-        self.assertEqual(self.one_char['result'],
-            sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
-        self.assertEquals(self.longer['result'],
-            sm.search(self.longer['pattern'], self.longer['text'], alg, True))
-        self.assertEquals(self.not_in_text['result'],
-            sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.is_the_same['result'],
-            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+        text = 'a'*1024+'b'
+        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+        text = ('a'*128+'b')*5
+        result = [ x*128+x-1 for x in range(1,6) ]
+        self.assertEqual(result, sm.search('b', text, alg, True))
+        pattern = 'ac'
+        text = ('abab'*1024+'ac')*5
+        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+        self.assertEqual(result, sm.search(pattern, text, alg, True))
 
     def boyer_moore(self):
         alg = sm.Algorithms.boyer_moore
-        self.assertEqual(self.one_char['result'],
-            sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
-        self.assertEquals(self.longer['result'],
-            sm.search(self.longer['pattern'], self.longer['text'], alg, True))
-        self.assertEquals(self.not_in_text['result'],
-            sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.same_length['result'],
-            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
-        self.assertEquals(self.is_the_same['result'],
-            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
+        text = 'a'*1024+'b'
+        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+        text = ('a'*128+'b')*5
+        result = [ x*128+x-1 for x in range(1,6) ]
+        self.assertEqual(result, sm.search('b', text, alg, True))
+        pattern = 'ac'
+        text = ('abab'*1024+'ac')*5
+        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+        self.assertEqual(result, sm.search(pattern, text, alg, True))

@@ -17,7 +17,7 @@ class BoyerMoore(Base):
                 result = self.__boyer_moore(pattern, text, start)
                 if result is not None:
                     results.append(result)
-                    start = result + 1
+                    start = result + len(pattern)
                 else:
                     stop = True
             return results
