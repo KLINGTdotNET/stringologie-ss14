@@ -31,17 +31,18 @@ class BoyerMoore(Base):
         Args:
             pat (str): pattern to search for
         '''
-        g = self.m - 1
-        suff = [ 0 for _ in range(0, self.m) ] # initialize
-        suff[self.m - 1] = self.m
-        for i in reversed(range(0, self.m - 1)):  # m-1 because the upper bound is exclusive
-            if i > g and suff[i + self.m - 1 - f] < i - g:
-                suff[i] = suff[i + self.m - 1 - f]
+        m = self.m
+        g = m - 1
+        suff = [ 0 for _ in range(0, m) ] # initialize
+        suff[m - 1] = m
+        for i in reversed(range(0, m - 1)):  # m-1 because the upper bound is exclusive
+            if i > g and suff[i + m - 1 - f] < i - g:
+                suff[i] = suff[i + m - 1 - f]
             else:
                 if i < g:
                     g = i
                 f = i
-                while g >= 0 and pat[g] == pat[g + self.m - 1 - f]:
+                while g >= 0 and pat[g] == pat[g + m - 1 - f]:
                     g -= 1
                 suff[i] = f-g
         return suff
@@ -53,14 +54,16 @@ class BoyerMoore(Base):
         Args:
             pat (str): pattern to search for
         '''
-        bm_shift = [ self.m ] * self.m
-        for k in reversed(range(0, self.m)):
-            if self.suffix[k] == k + 1:
-                for i in range(0, self.m - k):
-                    if bm_shift[i] == self.m:
-                        bm_shift[i] = self.m - 1 - k
-        for k in range(0, self.m - 1):
-            bm_shift[self.m - 1 - self.suffix[k]] = self.m - 1 - k
+        m = self.m
+        suffix = self.suffix
+        bm_shift = [ m ] * m
+        for k in reversed(range(0, m)):
+            if suffix[k] == k + 1:
+                for i in range(0, m - k):
+                    if bm_shift[i] == m:
+                        bm_shift[i] = m - 1 - k
+        for k in range(0, m - 1):
+            bm_shift[m - 1 - suffix[k]] = m - 1 - k
         return bm_shift
 
     def __get_bm_shift(self, pat):
@@ -71,9 +74,10 @@ class BoyerMoore(Base):
             pat (str): pattern to search for
         '''
         # returns bad_character shift table
-        bm_shift = defaultdict(lambda: self.m)
-        for i in range(0, self.m - 1):
-            bm_shift[pat[i]] = self.m - 1 - i
+        m = self.m
+        bm_shift = defaultdict(lambda: m)
+        for i in range(0, m - 1):
+            bm_shift[pat[i]] = m - 1 - i
         return bm_shift
 
     def __boyer_moore(self, pat, text, start):
@@ -86,11 +90,15 @@ class BoyerMoore(Base):
             start (str): position in text where search should be started
         '''
         i = start
-        while i <= self.n - self.m:
-            j = self.m - 1
+        n = self.n
+        m = self.m
+        wbs = self.weak_bm_shift
+        bs = self.bm_shift
+        while i <= n - m:
+            j = m - 1
             while j >= 0 and pat[j] == text[i + j]:
                 j -= 1
             if j < 0:
                 return i
             else:
-                i += max(self.weak_bm_shift[j], self.bm_shift[text[i + j]] - self.m + 1)
+                i += max(wbs[j], bs[text[i + j]] - m + 1)

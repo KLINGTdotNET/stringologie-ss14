@@ -32,13 +32,16 @@ class KnuthMorrisPratt(Base):
         '''
         i = start
         j = 0
-        while i <= self.n - self.m:
-            while j < self.m and pat[j] == text[i + j]:
+        n = self.n
+        m = self.m
+        strong_border = self.strong_border # access to class attributes is slow
+        while i <= n - m:
+            while j < m and pat[j] == text[i + j]:
                 j += 1
-            if j == self.m:
+            if j == m:
                 return i
-            i += j - self.strong_border[j]
-            j = max(0, self.strong_border[j])
+            i += j - strong_border[j]
+            j = max(0, strong_border[j])
 
     def __strong_border(self, pat):
         '''
@@ -47,13 +50,14 @@ class KnuthMorrisPratt(Base):
         Args:
             pat (str): pattern to search for
         '''
+        m = self.m
         strong_border = [ -1 ]
         t = -1
-        for j in range(1, self.m + 1):
+        for j in range(1, m + 1):
             while t >= 0 and pat[t] != pat[j - 1]:
                 t = strong_border[t]
             t += 1
-            if j == self.m or pat[t] != pat[j]:
+            if j == m or pat[t] != pat[j]:
                 strong_border.append(t)
             else:
                 strong_border.append(strong_border[t])

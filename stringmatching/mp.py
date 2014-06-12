@@ -32,14 +32,17 @@ class MorrisPratt(Base):
         '''
         i = start
         j = 0
+        n = self.n
+        m = self.m
+        bord = self.bord
 
-        while i <= self.n - self.m:
-            while j < self.m and pat[j] == text[i + j]:
+        while i <= n - m:
+            while j < m and pat[j] == text[i + j]:
                 j += 1
-            if j == self.m:
+            if j == m:
                 return i
-            i += j - self.bord[j]
-            j = max(0, self.bord[j])
+            i += j - bord[j]
+            j = max(0, bord[j])
 
     def __border_table(self, pat):
         '''
@@ -49,8 +52,9 @@ class MorrisPratt(Base):
             pat (str): pattern to search for
         '''
         bord = [ -1 ]
+        m = self.m
         t = -1
-        for j in range(1, self.m + 1):
+        for j in range(1, m + 1):
             while t >= 0 and pat[t] != pat[j - 1]:
                 t = bord[t]
             t += 1
@@ -66,9 +70,10 @@ class MorrisPratt(Base):
         '''
         i = 1
         j = 0
-        bord = [ -1 for _ in range(0, self.m + 1) ]
-        while i <= self.m:
-            while i + j < self.m and pat[j] == pat[i + j]:
+        m = self.m
+        bord = [ -1 for _ in range(0, m + 1) ]
+        while i <= m:
+            while i + j < m and pat[j] == pat[i + j]:
                 if bord[i + j] == -1:
                     bord[i + j] = j
                 j += 1
