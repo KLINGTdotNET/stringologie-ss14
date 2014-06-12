@@ -1,8 +1,0 @@
-Corner Cases
-- pattern and/or text is empty
-- pattern is only character long
-- first and all occurences of the pattern for all search operations
-- pattern is longer than the text and vice versa
-- pattern is not in text
-- pattern is as long as the text
-- pattern is the text
