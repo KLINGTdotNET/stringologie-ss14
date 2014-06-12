@@ -1,4 +1,4 @@
-from base import Base
+from stringmatching.base import Base
 
 class Naive(Base):
     def search(self, pattern, text, all=False):

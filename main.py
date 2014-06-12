@@ -1,4 +1,6 @@
-import stringmatching
+#!/usr/bin/env python3
+
+from stringmatching import stringmatching
 import logging
 
 def main():
@@ -6,8 +8,8 @@ def main():
     log_format = '[%(levelname)s] (#%(lineno)s) %(filename)s->%(funcName)s>>> "%(message)s"'
     logging.basicConfig(format=log_format)
     algs = stringmatching.Algorithms
-    pattern = 'a'
-    text = 'abbacbac'
+    pattern = 'abba'
+    text = 'adaabbaasdf'
     result = stringmatching.search(pattern, text, algs.naive, all=True)
     print(result)
     result = stringmatching.search(pattern, text, algs.last_occ, all=True)

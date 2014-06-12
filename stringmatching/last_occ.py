@@ -1,4 +1,4 @@
-from base import Base
+from stringmatching.base import Base
 from collections import defaultdict
 
 class LastOcc(Base):

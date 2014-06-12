@@ -1,11 +1,11 @@
 from enum import Enum,unique
 import logging
 
-from bm import BoyerMoore
-from kmp import KnuthMorrisPratt
-from last_occ import LastOcc
-from mp import MorrisPratt
-from naive import Naive
+from stringmatching.bm import BoyerMoore
+from stringmatching.kmp import KnuthMorrisPratt
+from stringmatching.last_occ import LastOcc
+from stringmatching.mp import MorrisPratt
+from stringmatching.naive import Naive
 
 @unique # ensure different values
 class Algorithms(Enum):

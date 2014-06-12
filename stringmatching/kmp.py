@@ -1,4 +1,4 @@
-from base import Base
+from stringmatching.base import Base
 
 class KnuthMorrisPratt(Base):
     def search(self, pattern, text, all=False):

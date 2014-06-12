@@ -1,5 +1,5 @@
 from collections import defaultdict
-from base import Base
+from stringmatching.base import Base
 
 class BoyerMoore(Base):
     def search(self, pattern, text, all=False):

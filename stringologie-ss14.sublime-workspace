@@ -507,15 +507,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "test/todo.txt",
-			"settings":
-			{
-				"buffer_size": 273,
-				"line_ending": "Unix",
-				"name": "todo.txt"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -609,13 +600,25 @@
 	},
 	"file_history":
 	[
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/naive.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/mp.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/last_occ.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/kmp.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/bm.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/bm.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/tests/test_algorithms.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/stringmatching/stringmatching.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/src/stringmatching.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/src/main.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/run_tests.sh",
+		"/home/andreas/personal/dev/python/stringologie-ss14/test/todo.txt",
+		"/home/andreas/personal/dev/python/stringologie-ss14/test/test_algorithms.py",
+		"/home/andreas/personal/dev/python/stringologie-ss14/resources/Pi_10million.txt",
+		"/home/andreas/personal/dev/python/stringologie-ss14/.idea/workspace.xml",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/kmp.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/last_occ.py",
-		"/home/andreas/personal/dev/python/stringologie-ss14/src/main.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/naive.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/mp.py",
-		"/home/andreas/personal/dev/python/stringologie-ss14/src/stringmatching.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/stringologie-ss14.sublime-project",
 		"/home/andreas/personal/dev/python/stringologie-ss14/src/base.py",
 		"/home/andreas/personal/dev/python/stringologie-ss14/LICENSE",
@@ -724,19 +727,7 @@
 		"/home/andreas/personal/dev/python/ssf_project/doc/src/template.tex",
 		"/home/andreas/personal/dev/python/ssf_project/doc/src/main.tex",
 		"/home/andreas/personal/dev/python/klingt.net/src/themes/klingt.net-bootstrap3/templates/article_helper.tmpl",
-		"/home/andreas/personal/dev/python/klingt.net/src/output/categories/misc.xml",
-		"/home/andreas/personal/dev/python/klingt.net/src/output/assets/css/theme.css",
-		"/home/andreas/personal/dev/python/klingt.net/src/cache/posts/another-test-post.html",
-		"/home/andreas/personal/dev/python/klingt.net/src/themes/klingt.net-bootstrap3/assets/css/theme.css",
-		"/home/andreas/personal/dev/python/klingt.net/src/output/categories/test.xml",
-		"/home/andreas/personal/dev/python/klingt.net/src/pages/contact.html",
-		"/home/andreas/personal/dev/python/klingt.net/src/themes/klingt.net-bootstrap3/templates/base_helper.tmpl",
-		"/home/andreas/personal/dev/python/klingt.net/src/themes/klingt.net-bootstrap3/templates/base.tmpl",
-		"/home/andreas/personal/dev/python/klingt.net/src/conf.py.org",
-		"/home/andreas/personal/dev/python/klingt.net/src/themes/klingt.net-bootstrap3/bundles",
-		"/home/andreas/personal/dev/python/klingt.net/src/cache/pages/contact.html",
-		"/home/andreas/personal/dev/python/klingt.net/src/output/pages/contact.html",
-		"/home/andreas/personal/dev/python/klingt.net/src/output/contact.data"
+		"/home/andreas/personal/dev/python/klingt.net/src/output/categories/misc.xml"
 	],
 	"find":
 	{
@@ -755,6 +746,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"from base import Base",
+			"from",
 			"self.a",
 			"|",
 			"'abcaayrdfa'",
@@ -880,9 +873,7 @@
 			"exclusive",
 			"Exclusive",
 			"exclusive",
-			"Exclusive",
-			"maxExclusive",
-			"exclusive"
+			"Exclusive"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -890,6 +881,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"from stringmatching.base import Base",
 			"",
 			"to_camel_case",
 			"remote_filepath",
@@ -907,38 +899,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "test/todo.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 273,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								273,
-								273
-							]
-						],
-						"settings":
-						{
-							"auto_name": "todo.txt",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -980,7 +942,7 @@
 	"project": "stringologie-ss14.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 68.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -988,6 +950,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"test",
+				"tests/test_algorithms.py"
+			],
 			[
 				"stringmat",
 				"src/stringmatching.py"
@@ -1175,10 +1141,6 @@
 			[
 				"par",
 				"xsdtocls/generator/parser.py"
-			],
-			[
-				"test",
-				"tests/test_tools.py"
 			],
 			[
 				"main.p",
