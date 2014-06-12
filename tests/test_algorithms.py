@@ -31,6 +31,11 @@ class TestAlgorithms(unittest.TestCase):
         }
         self.same_length = {
             'pattern': 'abc'*3,
+            'text': 'bcd'*3,
+            'result': []
+        }
+        self.is_the_same = {
+            'pattern': 'abc'*3,
             'text': 'abc'*3,
             'result': [0]
         }
@@ -55,6 +60,16 @@ class TestAlgorithms(unittest.TestCase):
             sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
         self.assertEquals(self.same_length['result'],
             sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.is_the_same['result'],
+            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
 
     def test_last_occ(self):
         alg = sm.Algorithms.last_occ
@@ -66,6 +81,16 @@ class TestAlgorithms(unittest.TestCase):
             sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
         self.assertEquals(self.same_length['result'],
             sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.is_the_same['result'],
+            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
 
     def test_morris_pratt(self):
         alg = sm.Algorithms.morris_pratt
@@ -77,6 +102,16 @@ class TestAlgorithms(unittest.TestCase):
             sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
         self.assertEquals(self.same_length['result'],
             sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.is_the_same['result'],
+            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
 
     def knuth_morris_pratt(self):
         alg = sm.Algorithms.knuth_morris_pratt
@@ -88,6 +123,16 @@ class TestAlgorithms(unittest.TestCase):
             sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
         self.assertEquals(self.same_length['result'],
             sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.is_the_same['result'],
+            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
 
     def boyer_moore(self):
         alg = sm.Algorithms.boyer_moore
@@ -99,3 +144,13 @@ class TestAlgorithms(unittest.TestCase):
             sm.search(self.not_in_text['pattern'], self.not_in_text['text'], alg, True))
         self.assertEquals(self.same_length['result'],
             sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.same_length['result'],
+            sm.search(self.same_length['pattern'], self.same_length['text'], alg, True))
+        self.assertEquals(self.is_the_same['result'],
+            sm.search(self.is_the_same['pattern'], self.is_the_same['text'], alg, True))
