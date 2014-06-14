@@ -15,28 +15,30 @@ def main():
     with open('resources/big.txt', 'r') as f:
         text = f.read()
     result = {}
+    pattern = 'Boscombe Valley is a country district not very far from Ross, in Herefordshire. The largest landed proprietor in that part is a Mr. John Turner, who made his money in Australia and returned some years ago to the old country. One of the farms which he held, that of Hatherley, was let to Mr. Charles McCarthy, who was also an ex-Australian. The men had known each other in the colonies, so that it was not unnatural that when they came to settle down they should do so as near each other as possible. Turner was apparently the richer man, so McCarthy became his tenant but still remained'
+    runs = 100
     for alg in algs:
         print('Measuring time for "{}" algorithm.'.format(alg.name))
         result[alg.name] = {
             'min': maxsize,
             'max': 0
         }
-        result['find'] = {
-            'min': maxsize,
-            'max': 0
-        }
-        for i in range(1, 25):
+        for i in range(1, runs):
             start = time.perf_counter()
-            sm.search('gold', text, alg, False)
+            sm.search(pattern, text, alg, False)
             end = time.perf_counter()
             duration = end-start
             if duration < result[alg.name]['min']:
                 result[alg.name]['min'] = duration
             if duration > result[alg.name]['max']:
                 result[alg.name]['max'] = duration
-    for i in range(1, 25):
+    result['find'] = {
+        'min': maxsize,
+        'max': 0
+    }
+    for i in range(1, runs):
         start = time.perf_counter()
-        text.find('gold')
+        text.find(pattern)
         end = time.perf_counter()
         duration = end-start
         if duration < result['find']['min']:
