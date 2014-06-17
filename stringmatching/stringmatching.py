@@ -6,6 +6,7 @@ from stringmatching.kmp import KnuthMorrisPratt
 from stringmatching.last_occ import LastOcc
 from stringmatching.mp import MorrisPratt
 from stringmatching.naive import Naive
+from stringmatching.tobias import TobiasKMP, TobiasBM, TobiasBMG
 
 @unique # ensure different values
 class Algorithms(Enum):
@@ -14,6 +15,9 @@ class Algorithms(Enum):
     morris_pratt = 3
     knuth_morris_pratt = 4
     boyer_moore = 5
+    tobias_kmp = 6
+    tobias_bm = 7
+    tobias_bmg = 8
 
 def search(pattern, text, algorithm, all=False):
     '''
@@ -43,6 +47,15 @@ def search(pattern, text, algorithm, all=False):
         elif algorithm == Algorithms.boyer_moore:
             bm = BoyerMoore()
             return bm.search(pattern, text, all)
+        elif algorithm == Algorithms.tobias_kmp:
+            kmp = TobiasKMP()
+            return kmp.search(pattern, text, all)
+        elif algorithm == Algorithms.tobias_bm:
+            bm = TobiasBM()
+            return bm.search(pattern, text, all)
+        elif algorithm == Algorithms.tobias_bmg:
+            bmg = TobiasBMG()
+            return bmg.search(pattern, text, all)
         else:
             raise KeyError('Algorithm {}:{} is not implemented!'.format(algorithm.name, algorithm.value))
     else:
