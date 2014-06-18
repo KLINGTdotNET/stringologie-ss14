@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-/usr/bin/env python3 -m unittest discover
+/usr/bin/env python3 -m unittest discover --verbose

@@ -11,15 +11,52 @@ class KnuthMorrisPratt(Base):
             limit = len(text) - len(pattern)
             stop = False
             while start <= limit and not stop:
-                result = self.__knuth_morris_pratt(pattern, text, start)
-                if result is not None:
-                    results.append(result)
-                    start = result + len(pattern)
+                #result = self.__knuth_morris_pratt(pattern, text, start)
+                result = self.__kmp(text[start:], pattern)
+                if result:
+                    results += result
+                    start = result[-1] + len(pattern)
                 else:
                     stop = True
             return results
         else:
-            return [ self.__knuth_morris_pratt(pattern, text, start) ]
+            # return self.__knuth_morris_pratt(pattern, text, start)
+            return self.__kmp(text, pattern)
+
+    def __kmp(self, string, word):
+        word_length = len(word)
+        string_length = len(string)
+
+        offsets = []
+
+        if word_length > string_length:
+            return offsets
+
+        prefix = self.compute_prefix(word)
+        q = 0
+        for index, letter in enumerate(string):
+            while q > 0 and word[q] != letter:
+                q = prefix[q - 1]
+            if word[q] == letter:
+                q += 1
+            if q == word_length:
+                offsets.append(index - word_length + 1)
+                q = prefix[q - 1]
+        return offsets
+
+    def compute_prefix(self, word):
+        word_length = len(word)
+        prefix = [0] * word_length
+        k = 0
+
+        for q in range(1, word_length):
+            while k > 0 and word[k] != word[q]:
+                k = prefix[k - 1]
+
+            if word[k + 1] == word[q]:
+                k = k + 1
+            prefix[q] = k
+        return prefix
 
     def __knuth_morris_pratt(self, pat, text, start):
         '''
@@ -41,7 +78,7 @@ class KnuthMorrisPratt(Base):
             if j == m:
                 return i
             i += j - strong_border[j]
-            j = max(0, strong_border[j])
+            j = strong_border[j]
 
     def __strong_border(self, pat):
         '''

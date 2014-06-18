@@ -46,14 +46,13 @@ class TestAlgorithms(unittest.TestCase):
         }
 
     def test_search(self):
-        alg = sm.Algorithms.naive
-        # test for empty values
-        pattern = 'some pattern'
-        text = 'another useless text'
-        self.assertRaises(ValueError, sm.search, *('', text, alg))
-        self.assertRaises(ValueError, sm.search, *(pattern, '', alg))
-        self.assertRaises(ValueError, sm.search, *(None, text, alg))
-        self.assertRaises(ValueError, sm.search, *(pattern, None, alg))
+        for alg in sm.Algorithms:
+            pattern = 'some pattern'
+            text = 'another useless text'
+            self.assertRaises(ValueError, sm.search, *('', text, alg))
+            self.assertRaises(ValueError, sm.search, *(pattern, '', alg))
+            self.assertRaises(ValueError, sm.search, *(None, text, alg))
+            self.assertRaises(ValueError, sm.search, *(pattern, None, alg))
 
     def test_corner_cases(self):
         for alg in sm.Algorithms:
@@ -78,62 +77,14 @@ class TestAlgorithms(unittest.TestCase):
             self.assertEqual(self.almost['result'],
                 sm.search(self.almost['pattern'], self.almost['text'], alg, True))
 
-    def test_naive(self):
-        alg = sm.Algorithms.naive
-        text = 'a'*1024+'b'
-        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
-        text = ('a'*128+'b')*5
-        result = [ x*128+x-1 for x in range(1,6) ]
-        self.assertEqual(result, sm.search('b', text, alg, True))
-        pattern = 'ac'
-        text = ('abab'*1024+'ac')*5
-        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
-        self.assertEqual(result, sm.search(pattern, text, alg, True))
-
-    def test_last_occ(self):
-        alg = sm.Algorithms.last_occ
-        text = 'a'*1024+'b'
-        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
-        text = ('a'*128+'b')*5
-        result = [ x*128+x-1 for x in range(1,6) ]
-        self.assertEqual(result, sm.search('b', text, alg, True))
-        pattern = 'ac'
-        text = ('abab'*1024+'ac')*5
-        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
-        self.assertEqual(result, sm.search(pattern, text, alg, True))
-
-    def test_morris_pratt(self):
-        alg = sm.Algorithms.morris_pratt
-        text = 'a'*1024+'b'
-        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
-        text = ('a'*128+'b')*5
-        result = [ x*128+x-1 for x in range(1,6) ]
-        self.assertEqual(result, sm.search('b', text, alg, True))
-        pattern = 'ac'
-        text = ('abab'*1024+'ac')*5
-        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
-        self.assertEqual(result, sm.search(pattern, text, alg, True))
-
-    def knuth_morris_pratt(self):
-        alg = sm.Algorithms.knuth_morris_pratt
-        text = 'a'*1024+'b'
-        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
-        text = ('a'*128+'b')*5
-        result = [ x*128+x-1 for x in range(1,6) ]
-        self.assertEqual(result, sm.search('b', text, alg, True))
-        pattern = 'ac'
-        text = ('abab'*1024+'ac')*5
-        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
-        self.assertEqual(result, sm.search(pattern, text, alg, True))
-
-    def boyer_moore(self):
-        alg = sm.Algorithms.boyer_moore
-        text = 'a'*1024+'b'
-        self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
-        text = ('a'*128+'b')*5
-        result = [ x*128+x-1 for x in range(1,6) ]
-        self.assertEqual(result, sm.search('b', text, alg, True))
-        pattern = 'ac'
-        text = ('abab'*1024+'ac')*5
-        result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
-        self.assertEqual(result, sm.search(pattern, text, alg, True))
+    def test_all(self):
+        for alg in sm.Algorithms:
+            text = 'a'*1024+'b'
+            self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
+            text = ('a'*128+'b')*5
+            result = [ x*128+x-1 for x in range(1,6) ]
+            self.assertEqual(result, sm.search('b', text, alg, True))
+            pattern = 'ac'
+            text = ('abab'*1024+'ac')*5
+            result = [ x*4*1024+2*(x-1) for x in range(1,6) ]
+            self.assertEqual(result, sm.search(pattern, text, alg, True))
