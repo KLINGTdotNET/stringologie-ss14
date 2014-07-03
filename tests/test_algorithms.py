@@ -46,16 +46,18 @@ class TestAlgorithms(unittest.TestCase):
         }
 
     def test_search(self):
-        for alg in sm.Algorithms:
+        for name in sm.algs:
             pattern = 'some pattern'
             text = 'another useless text'
+            alg = sm.algs[name]
             self.assertRaises(ValueError, sm.search, *('', text, alg))
             self.assertRaises(ValueError, sm.search, *(pattern, '', alg))
             self.assertRaises(ValueError, sm.search, *(None, text, alg))
             self.assertRaises(ValueError, sm.search, *(pattern, None, alg))
 
     def test_corner_cases(self):
-        for alg in sm.Algorithms:
+        for name in sm.algs:
+            alg = sm.algs[name]
             self.assertEqual(self.one_char['result'],
                 sm.search(self.one_char['pattern'], self.one_char['text'], alg, True))
             self.assertEqual(self.longer['result'],
@@ -78,7 +80,8 @@ class TestAlgorithms(unittest.TestCase):
                 sm.search(self.almost['pattern'], self.almost['text'], alg, True))
 
     def test_all(self):
-        for alg in sm.Algorithms:
+        for name in sm.algs:
+            alg = sm.algs[name]
             text = 'a'*1024+'b'
             self.assertEqual([ len(text)-1 ], sm.search('b', text, alg, True))
             text = ('a'*128+'b')*5
