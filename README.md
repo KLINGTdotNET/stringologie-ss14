@@ -1,5 +1,7 @@
 # 'Stringologie' summer semester 2014 @ Uni-Leipzig
 
+- works with pypy3
+
 ## Algorithms
 
 - naive sliding window

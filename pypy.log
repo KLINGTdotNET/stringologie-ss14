@@ -1,0 +1,23 @@
+Measuring time for "boyer_moore_galil" algorithm.
+Measuring time for "naive" algorithm.
+Measuring time for "last_occ" algorithm.
+Measuring time for "boyer_moore" algorithm.
+Measuring time for "knuth_morris_pratt" algorithm.
+{'boyer_moore': {'max': 0.0066670000000000895, 'min': 0.0},
+ 'boyer_moore_galil': {'max': 0.036665999999999976, 'min': 0.0},
+ 'find': {'max': 0.0033330000000000304, 'min': 0.0},
+ 'knuth_morris_pratt': {'max': 0.06333299999999997,
+                        'min': 0.04666599999999965},
+ 'last_occ': {'max': 0.0066669999999999785, 'min': 0.0},
+ 'naive': {'max': 0.0066669999999999785, 'min': 0.0}}
+Measuring time for "boyer_moore_galil" algorithm.
+Measuring time for "naive" algorithm.
+Measuring time for "last_occ" algorithm.
+Measuring time for "boyer_moore" algorithm.
+Measuring time for "knuth_morris_pratt" algorithm.
+{'boyer_moore': {'max': 0.009999999999999787, 'min': 0.0066670000000002005},
+ 'boyer_moore_galil': {'max': 0.06000000000000005, 'min': 0.05666600000000033},
+ 'knuth_morris_pratt': {'max': 0.10999999999999988,
+                        'min': 0.10999999999999988},
+ 'last_occ': {'max': 0.0066670000000002005, 'min': 0.0033330000000000304},
+ 'naive': {'max': 0.0066669999999997565, 'min': 0.0033330000000000304}}

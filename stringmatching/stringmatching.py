@@ -1,4 +1,3 @@
-from enum import Enum,unique
 import logging
 
 from stringmatching.bm import BoyerMoore, BoyerMooreGalil
@@ -10,7 +9,6 @@ from stringmatching.naive import Naive
 algs = {
     'naive': Naive(),
     'last_occ': LastOcc(),
-    'morris_pratt': MorrisPratt(),
     'knuth_morris_pratt': KnuthMorrisPratt(),
     'boyer_moore': BoyerMoore(),
     'boyer_moore_galil': BoyerMooreGalil()
